@@ -1,0 +1,18 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+
+    <h1>PROFILES</h1>
+<h1>$msg.get("BOOKS_HEADING_ALL")</h1>
+<div class="row row-3">
+    #foreach($profile in $profiles)
+        <div class="col">
+            <a class="profile" href="$WebPath.getPROFILES()$profile.getIsbn()">
+                <div class="profileCover">
+                    <img src="$profile.getMainPhoto()" height="200px" width="100px">
+                </div>
+                $profile.getName() $profile.getSurname()
+            </a>
+        </div>
+    #end
+</div>
+#end

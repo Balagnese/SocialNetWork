@@ -1,0 +1,14 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<form id="registerForm" method="post" action="/register/">
+    <h1>Registration</h1>
+    <label>Login</label>
+    <input id="username" type="text" name="username" placeholder="username" value="" required>
+    <label>Password</label>
+    <input id="password" type="password" name="password" placeholder="password" value="" required>
+##    #if($repeat_password != $password)
+##        alert("qwerty");
+##    #end
+    <button type="submit"> Ok</button>
+</form>
+#end

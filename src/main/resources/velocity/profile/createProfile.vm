@@ -1,0 +1,31 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<form id="createProfileForm" method="post">
+    <h1>Manage Profile!</h1>
+    <label>Name</label>
+    <input id="name" type="text" name="name" placeholder="name" value="" required>
+    <label>Surname</label>
+    <input id="surname" type="text" name="surname" placeholder="surname" value="" required>
+    <label>Zodiac</label>
+    <select name="zodiac">
+        <option>Aries </option>
+        <option>Taurus</option>
+        <option>Gemini</option>
+        <option>Cancer </option>
+        <option>Leo</option>
+        <option>Virgo</option>
+        <option>Libra</option>
+        <option>Scorpio </option>
+        <option>Sagittarius</option>
+        <option>Capricorn </option>
+        <option>Aquarius</option>
+        <option>Pisces</option>
+    </select>
+    <br>
+
+##    #if($repeat_password != $password)
+##        alert("qwerty");
+##    #end
+    <button type="submit"> Ok</button>
+</form>
+#end

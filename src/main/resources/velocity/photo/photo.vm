@@ -1,0 +1,12 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+PROFILE PHOTOS
+    #foreach($photo in $photos)
+    <div class="col">
+        <img src="$photo.getUrl()" style="width:50%" >
+        <div>Likes: $photo.getLikesCount()</div>
+        <div>Dislikes: $photo.getDislikesCount()</div>
+    </div>
+    #end
+
+#end

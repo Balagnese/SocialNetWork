@@ -1,0 +1,47 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+PROFILE PHOTOS
+    #foreach($photo in $photos)
+    <div class="col">
+        <img src="$photo.getUrl()" style="width:50%" >
+        <div>Likes: $photo.getLikesCount()</div>
+        <div>Dislikes: $photo.getDislikesCount()</div>
+        #if($photo.getActionByPerson($profile) == "LIKE")
+
+            <form action="/photos/$photo.getId()/clear/" method="post">
+            ##            /photos/:id/:action"
+                <button type="submit">Clear</button>
+            </form>
+
+            <form action="/photos/$photo.getId()/dislike/" method="post">
+            ##            /photos/:id/:action"
+                <button type="submit">Dislike</button>
+            </form>
+        #else
+            #if($photo.getActionByPerson($profile) == "DISLIKE")
+                <form action="/photos/$photo.getId()/clear/" method="post">
+                ##            /photos/:id/:action"
+                    <button type="submit">Clear</button>
+                </form>
+
+                <form action="/photos/$photo.getId()/like/" method="post" >
+                ##            /photos/:id/:action"
+                    <button id="like-$photo.getId()" type="submit">Like</button>
+                </form>
+            #else
+                <form action="/photos/$photo.getId()/like/" method="post" >
+                ##            /photos/:id/:action"
+                    <button id="like-$photo.getId()" type="submit">Like</button>
+                </form>
+
+                <form action="/photos/$photo.getId()/dislike/" method="post">
+                ##            /photos/:id/:action"
+                    <button type="submit">Dislike</button>
+                </form>
+            #end
+
+        #end
+    </div>
+    #end
+
+#end

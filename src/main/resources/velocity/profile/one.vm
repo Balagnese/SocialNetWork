@@ -1,0 +1,95 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+    PROFILE
+    #if($profile)
+        $profile.getIsbn()
+    <h1>Name: $profile.getName()</h1>
+    <h1>Surname: $profile.getSurname()</h1>
+    <h1>Zodiac: $profile.getZodiac()</h1>
+
+        #if($relationToPerson == "NEUTRAL")
+        <form action="/perform_relation/$profile.getIsbn()/block/" method="post">
+            <button type="submit">Block User</button>
+        </form>
+
+        <form action="/perform_relation/$profile.getIsbn()/subscription/" method="post">
+            <button type="submit">Subscribe User</button>
+        </form>
+            #else #if($relationToPerson == "SUBSCRIPTION")
+            <form action="/perform_relation/$profile.getIsbn()/block/" method="post">
+                <button type="submit">Block User</button>
+            </form>
+            <form action="/perform_relation/$profile.getIsbn()/neutral/" method="post">
+                <button type="submit">Neutralize User</button>
+            </form>
+            #else
+            <form action="/perform_relation/$profile.getIsbn()/subscription/" method="post">
+                <button type="submit">Subscribe User</button>
+            </form>
+
+            <form action="/perform_relation/$profile.getIsbn()/neutral/" method="post">
+                <button type="submit">Neutralize User</button>
+            </form>
+            #end
+        #end
+        $relationToPerson
+        $relationToUser
+
+        #if ($relationToUser == "NEUTRAL")
+        <a href="/profiles/$profile.getIsbn()/photos">Get Photos</a>
+            #else #if($relationToPerson == "SUBSCRIPTION" && $relationToUser == "SUBSCRIPTION")
+                <a href="/profiles/$profile.getIsbn()/liking_photos">Get Photos</a>
+            #end
+        #end
+
+
+    #else
+    <h1>Profile not found</h1>
+    #end
+##    #foreach($photo in $photos)
+##    <div class="col">
+##        <img src="$photo.getUrl()" style="width:50%" >
+##        <div>Likes: $photo.getLikesCount()</div>
+##        <div>Dislikes: $photo.getDislikesCount()</div>
+##        #if($photo.getActionByPerson($profile) == "LIKE")
+##
+##            <form action="/photos/$photo.getId()/clear/" method="post">
+##            ##            /photos/:id/:action"
+##                <button type="submit">Clear</button>
+##            </form>
+##
+##            <form action="/photos/$photo.getId()/dislike/" method="post">
+##            ##            /photos/:id/:action"
+##                <button type="submit">Dislike</button>
+##            </form>
+##        #else
+##            #if($photo.getActionByPerson($profile) == "DISLIKE")
+##                <form action="/photos/$photo.getId()/clear/" method="post">
+##                ##            /photos/:id/:action"
+##                    <button type="submit">Clear</button>
+##                </form>
+##
+##                <form action="/photos/$photo.getId()/like/" method="post" >
+##                ##            /photos/:id/:action"
+##                    <button id="like-$photo.getId()" type="submit">Like</button>
+##                </form>
+##            #else
+##                <form action="/photos/$photo.getId()/like/" method="post" >
+##                ##            /photos/:id/:action"
+##                    <button id="like-$photo.getId()" type="submit">Like</button>
+##                </form>
+##
+##                <form action="/photos/$photo.getId()/dislike/" method="post">
+##                ##            /photos/:id/:action"
+##                    <button type="submit">Dislike</button>
+##                </form>
+##            #end
+##
+##        #end
+##
+##
+##
+##    </div>
+##    #end
+
+#end

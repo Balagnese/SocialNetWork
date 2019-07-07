@@ -1,0 +1,12 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<form id="uploadImageForm" method="post" action="/upload_image/">
+    <h1>Upload Image </h1>
+    <label>Image URL</label>
+    <input id="url" type="text" name="url" placeholder="URL" value="" required>
+##    #if($repeat_password != $password)
+##        alert("qwerty");
+##    #end
+    <button type="submit"> Ok</button>
+</form>
+#end

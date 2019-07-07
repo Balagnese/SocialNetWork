@@ -1,0 +1,55 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+MY PROFILE
+    #if($profile)
+    <h1>Name: $profile.getName()</h1>
+    <h1>Surname: $profile.getSurname()</h1>
+    <h1>Zodiac: $profile.getZodiac()</h1>
+    <a href="$WebPath.getCHANGE_PROFILE()">Change Profile Data</a>
+    <br>
+
+    ##    <a class="profile" href="$WebPath.getPHOTOS()">
+    ##        Photos
+    ##    </a>
+
+    #else
+    <h1>Profile not found</h1>
+    #end
+
+    <a href="$WebPath.getUPLOAD_IMAGE()">Upload Photo</a>
+    <br>
+    <a href="$WebPath.getMY_PROFILE_PHOTOS()">View Photos</a>
+##    #foreach($photo in $my_photos)
+##    <div class="col">
+##    ##        <script>
+##    ##            $(document).ready(function($){
+##    ##                $(document).on("submit", "#like-$photo.getId()", function(event){
+##    ##                event.preventDefault();
+##    ##                alert("qwertyu");
+##    ##            })
+##    ##
+##    ##            })
+##    ##        </script>
+##        <img src="$photo.getUrl()" style="width:50%" >
+##        <form action="/choose_main_photo/$photo.getId()/" method="post">
+##            <button id="chooseMainPhoto-$photo.getId()" type="submit">Choose as main photo</button>
+##        </form>
+##
+##        <form action="/photos/$photo.getId()/like/" method="post" >
+##        ##            /photos/:id/:action"
+##            <button id="like-$photo.getId()" type="submit">Like</button>
+##        </form>
+##        <form action="/photos/$photo.getId()/clear/" method="post">
+##        ##            /photos/:id/:action"
+##            <button type="submit">Clear</button>
+##        </form>
+##        <form action="/photos/$photo.getId()/dislike/" method="post">
+##        ##            /photos/:id/:action"
+##            <button type="submit">Dislike</button>
+##        </form>
+##
+##
+##    </div>
+##    #end
+
+#end
